@@ -16,18 +16,23 @@ using System.Windows.Shapes;
 namespace ex04_wpf_bikeshop
 {
     /// <summary>
-    /// ContactPage.xaml에 대한 상호 작용 논리
+    /// MenuPage.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class ContactPage : Page
+    public partial class MenuPage : Page
     {
-        public ContactPage()
+        public MenuPage()
         {
             InitializeComponent();
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private void BtnEmailSupport_Click(object sender, RoutedEventArgs e)
         {
-            
+            NavigationService.Navigate(new Uri("/ContactPage.Xaml",UriKind.RelativeOrAbsolute));
+        }
+
+        private void BtnProduct_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/ProductPage.xaml", UriKind.RelativeOrAbsolute));
         }
     }
 }

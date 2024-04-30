@@ -25,7 +25,7 @@ namespace ex04_wpf_bikeshop
         {
             // 코드 비하인드에서 source 속성에 페이지를 넣을때는
             // UriKind.RelativeOrAbsolute 파라미터를 넣어야함
-            MainFrame.Source = new Uri("/ContactPage.xaml", UriKind.RelativeOrAbsolute);
+            MainFrame.Source = new Uri("/MenuPage.xaml", UriKind.RelativeOrAbsolute);
         }
     }
 }
