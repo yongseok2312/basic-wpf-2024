@@ -43,6 +43,8 @@ IoT 개발자 WPF 학습리포지토리
         - App.xaml Resource - 애플리케이션 전체에 적용되는 디자인
         - 리소스사전 - 공유할 디자인 내용이 많을 때 파일로 따로 지정
 
+![wpf001](https://github.com/yongseok2312/basic-wpf-2024/assets/135982451/bfa7fc00-7c0d-4095-943e-ec884973dfb8)
+
 - WPF 기본학습
     - 데이터바인딩 마무리
     - 디자인 리소스
