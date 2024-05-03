@@ -3,8 +3,9 @@
     public class Employees
     {
         public int Id { get; set; }
-        public string EmpName { get; set; }
-        public string Salary { get; set; }
+        public required string EmpName { get; set; }
+        public required string Salary { get; set; }
+
         public int DeptName { get; set; }
         public int Addr { get; set; }
 
