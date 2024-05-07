@@ -51,7 +51,7 @@ IoT 개발자 WPF 학습리포지토리
         - View : 화면, 순수 xaml로만 구성
         - ViewModel : 뷰에 대한 메서드, 액션, INotifyPropertyChanged를 구현
 
-        ![MVVM패턴](https://raw.githubusercontent.com/hugoMGSung/basic-wpf-2024/main/images/wpf001.png)
+        ![MVVM패턴](https://raw.githubusercontent.com/lyos2312/basic-wpf-2024/main/images/wpf001.png)
     
     - 권장 구현방법
         - ViewModel 생성, 알림 속성 구현, 
@@ -104,8 +104,9 @@ IoT 개발자 WPF 학습리포지토리
 
 
 
-    ![실행화면](https://raw.githubusercontent.com/hugoMGSung/basic-wpf-2024/main/images/wpf002.png)
+    ![실행화면](https://raw.githubusercontent.com/lyos2312/basic-wpf-2024/main/images/wpf002.png)
 
 ## 5일차
-- Caliburn.Micro + MahApps.Metro
+- MahApps.Metro (https://mahapps.com/)
     - Metro(Modern UI) 디자인 접목
+    - 
