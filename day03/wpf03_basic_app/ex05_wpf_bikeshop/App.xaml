@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:ex05_wpf_bikeshop"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary Source="CustomDic.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="CustomDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

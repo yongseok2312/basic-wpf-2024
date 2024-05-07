@@ -10,9 +10,8 @@ namespace ex06_caliburn_basic
     public partial class App : Application
     {
         public App()
-        { 
-            //InitializeComponent(); 
+        {
+            // InitializeComponent(); // Bootstrapper를 Application에 연결.
         }
     }
-
 }

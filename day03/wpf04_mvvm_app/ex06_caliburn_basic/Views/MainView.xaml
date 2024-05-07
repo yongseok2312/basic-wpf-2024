@@ -7,10 +7,7 @@
         mc:Ignorable="d"
         Title="MainView" Height="450" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="59*"/>
-            <ColumnDefinition Width="741*"/>
-        </Grid.ColumnDefinitions>
-        <Label Content="{Binding Greeting}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="30" Grid.Column="1" Margin="336,0,0,0"/>
+        <Label Content="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center" 
+               FontSize="30" />
     </Grid>
 </Window>

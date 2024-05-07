@@ -21,9 +21,9 @@ namespace ex01_wpf_start
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnClick_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("hello,WPF!!","알림",MessageBoxButton.OK,MessageBoxImage.Information);    
+            MessageBox.Show("Hello, WPF!!!", "알림", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
