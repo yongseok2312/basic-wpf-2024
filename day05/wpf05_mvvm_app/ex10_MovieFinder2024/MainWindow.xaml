@@ -7,6 +7,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
+                Loaded="MetroWindow_Loaded"
         Title="MovieFinder 2024" Height="500" Width="1000" MinHeight="370" MinWidth="530" FontFamily="NamnumGothic">
     <mah:MetroWindow.IconTemplate>
         <DataTemplate>
@@ -49,14 +50,27 @@
             </Button>
         </Grid>
 
-        <DataGrid x:Name="GrbResult" CurrentCellChanged="GrbResult_CurrentCellChanged" Grid.Row="1" Grid.Column="0" Margin="5" IsReadOnly="True" ItemsSource="{Binding}" Style="{StaticResource MahApps.Styles.DataGrid.Azure}"/>
+        <DataGrid x:Name="GrbResult" 
+                  SelectedCellsChanged="GrbResult_SelectedCellsChanged"
+                  Grid.Row="1" Grid.Column="0" Margin="5" 
+                  IsReadOnly="True" ItemsSource="{Binding}" 
+                  Style="{StaticResource MahApps.Styles.DataGrid.Azure}"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Title}" Header="한글제목" FontWeight="Bold"/>
+                <DataGridTextColumn Binding="{Binding Original_Title}" Header="원제목"/>
+                <DataGridTextColumn Binding="{Binding Release_Date}" Header="개봉일"/>
+                <DataGridTextColumn Binding="{Binding Popularity, StringFormat={}{0:0.0}}" Header="인기도"/>
+                <DataGridTextColumn Binding="{Binding Vote_average, StringFormat={}{0:0.0}}" Header="평점"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <!-- 포스터 영역-->
         <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
             <GroupBox Header="포스터" Margin="10"
                       mah:HeaderedControlHelper.HeaderFontSize="14"
                       mah:HeaderedControlHelper.HeaderFontWeight="Bold"
                       mah:HeaderedControlHelper.HeaderHorizontalContentAlignment="Center">
-                <Image x:Name="ImgPoster" Source="NoPicture.png" Margin="15,5"/>
+                <Image x:Name="ImgPoster" Source="/NoPicture.png" Margin="15,5"/>
             </GroupBox>
         </Grid>
         <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
