@@ -10,6 +10,9 @@ namespace ex07_EmployeeMngApp.Helpers
                                                     "User ID=ems_user;" +
                                                     "Encrypt=False;"+
                                                     "Password=ems_p@ss";
-        //public static required IDialogCoordinator dialogCoordinator;
+
+
+        // Metro방식 다이얼로그 적용을 위해선 반드시 필요!
+        public static IDialogCoordinator DialogCoordinator { get; set; }
     }
 }

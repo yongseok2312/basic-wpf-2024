@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
+using ex07_EmployeeMngApp.Helpers;
 using ex07_EmployeeMngApp.Models;
+using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Data.SqlClient;
 using System.Windows;
 
@@ -7,6 +9,8 @@ namespace ex07_EmployeeMngApp.ViewModels
 {
     public class MainViewModel : Conductor<object>
     {
+        private IDialogCoordinator _dialogCoordinator; // 메트로방식 다이얼로그 디자인 적용 객체
+
         // 멤버변수
         private int id;
         private string empName;
@@ -134,8 +138,13 @@ namespace ex07_EmployeeMngApp.ViewModels
         /// <summary>
         /// Caliburn.Micro가 Xaml의 버튼 x:Name과 동일한 이름의 메서드로 매핑
         /// </summary>
-        public void SaveEmployee()
+        public async void SaveEmployee()
         {
+            if (Common.DialogCoordinator != null)
+            {
+                this._dialogCoordinator = Common.DialogCoordinator;
+            }
+
             //MessageBox.Show("저장버튼 동작!");
             using (SqlConnection conn = new SqlConnection(Helpers.Common.CONNSTRING))
             {
@@ -166,10 +175,12 @@ namespace ex07_EmployeeMngApp.ViewModels
 
                 if (result > 0)
                 {
-                    MessageBox.Show("저장성공!");
+                    // MessageBox.Show("저장성공!");
+                    await this._dialogCoordinator.ShowMessageAsync(this, "저장성공!", "저장");
                 } else
                 {
-                    MessageBox.Show("저장실패!");
+                    //MessageBox.Show("저장실패!");
+                    await this._dialogCoordinator.ShowMessageAsync(this, "저장실패!", "저장");
                 }
                 GetEmployees(); // 그리드 재조회
                 NewEmployee(); // 모든 입력컨트롤 초기화 
@@ -205,18 +216,29 @@ namespace ex07_EmployeeMngApp.ViewModels
             get { return Id != 0; }  // TextBox Id 속서의 값이 0이면 false, 0이 아니면 true
         }
 
-        public void DelEmployee()
+        public async void DelEmployee()
         {
+            if (Common.DialogCoordinator != null)
+            {
+                this._dialogCoordinator = Common.DialogCoordinator;
+            }
+
             if (Id == 0)
             {
-                MessageBox.Show("삭제불가!");
+                //MessageBox.Show("삭제불가!");
+                await this._dialogCoordinator.ShowMessageAsync(this, "삭제불가!", "삭제");
                 return;
             }
 
-            if (MessageBox.Show("삭제하시겠습니까?", "삭제여부", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+            var val = await this._dialogCoordinator.ShowMessageAsync(this, "삭제하시겠습니까?", "삭제여부", MessageDialogStyle.AffirmativeAndNegative);
+            if (val == MessageDialogResult.Negative)
             {
-                return; 
+                return;
             }
+            //if (MessageBox.Show("삭제하시겠습니까?", "삭제여부", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+            //{
+            //    return; 
+            //}
 
             using (SqlConnection conn = new SqlConnection(Helpers.Common.CONNSTRING))
             {
@@ -228,11 +250,14 @@ namespace ex07_EmployeeMngApp.ViewModels
                 var res = cmd.ExecuteNonQuery();
                 if (res >= 0)
                 {
-                    MessageBox.Show("삭제성공!");
+                    //MessageBox.Show("삭제성공!");
+                    await this._dialogCoordinator.ShowMessageAsync(this, "삭제성공!", "삭제");
                 }
                 else
                 {
-                    MessageBox.Show("삭제실패!");
+                    //MessageBox.Show("삭제실패!");
+                    await this._dialogCoordinator.ShowMessageAsync(this, "삭제실패!", "삭제");
+
                 }
 
                 GetEmployees();

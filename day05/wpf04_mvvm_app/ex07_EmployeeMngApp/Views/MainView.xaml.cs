@@ -1,4 +1,6 @@
-﻿using MahApps.Metro.Controls;
+﻿using ex07_EmployeeMngApp.Helpers;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace ex07_EmployeeMngApp.Views
 {
@@ -11,6 +13,9 @@ namespace ex07_EmployeeMngApp.Views
         public MainView()
         {
             InitializeComponent();
+
+            Common.DialogCoordinator = DialogCoordinator.Instance; // 생성된 다이얼로그꾸미기 객체를 공통으로 이전
+            this.DataContext = Common.DialogCoordinator;
         }
     }
 }
