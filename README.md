@@ -51,7 +51,8 @@ IoT 개발자 WPF 학습리포지토리
         - View : 화면, 순수 xaml로만 구성
         - ViewModel : 뷰에 대한 메서드, 액션, INotifyPropertyChanged를 구현
 
-        ![MVVM패턴](https://raw.githubusercontent.com/lyos2312/basic-wpf-2024/main/images/wpf001.png)
+       ![wpf001](https://github.com/yongseok2312/basic-wpf-2024/assets/135982451/d2e7561d-b5dc-4969-bf4e-43935191edb3)
+
     
     - 권장 구현방법
         - ViewModel 생성, 알림 속성 구현, 
@@ -103,16 +104,19 @@ IoT 개발자 WPF 학습리포지토리
             - 모든 속성에 NotifyOfPropertyChange() 메서드 존재!!(값 변경 알림)
 
 
+![wpf002](https://github.com/yongseok2312/basic-wpf-2024/assets/135982451/f44dc6c6-7a45-417a-ae15-b65fb1916298)
 
-    ![실행화면](https://raw.githubusercontent.com/lyos2312/basic-wpf-2024/main/images/wpf002.png)
+   
 
 ## 5일차
 - MahApps.Metro (https://mahapps.com/)
     - Metro(Modern UI) 디자인 접목
 
-     ![실행화면](https://raw.githubusercontent.com/hugoMGSung/basic-wpf-2024/main/images/wpf003.png)
+     ![wpf003](https://github.com/yongseok2312/basic-wpf-2024/assets/135982451/1411bdac-d853-4e7a-a252-1868c5298c51)
 
-     ![저장화면](https://raw.githubusercontent.com/hugoMGSung/basic-wpf-2024/main/images/wpf004.png)
+
+     ![wpf004](https://github.com/yongseok2312/basic-wpf-2024/assets/135982451/03e797d1-d918-475b-b6d6-213422980bc3)
+
 
 - Movie API 연동 앱, MovieFinder 2024
     - DB(SQLServer) 연동
