@@ -145,9 +145,16 @@ IoT 개발자 WPF 학습리포지토리
     - 그리드뷰 영화를 더블클릭하면 영화소개 팝업
 
 ## 7일차
-- MovieFinder 2024 마무리
-- 데이터포털 API 연동앱 예제
-    - 5월 13일 개인 프로젝트 참조 소스
+- MovieFinder 2024 완료
 
+    https://github.com/hugoMGSung/basic-wpf-2024/assets/59336331/906503a6-8ae8-4a8f-b02b-56a40bb0aa09
+
+- 데이터포털 API 연동앱 예제
+    - CefSharp 사용시 플랫폼 대상 AnyCPU에서 x64로 변경필수!
+    - MahApps.Metro UI, IconPacks
+    - Newtonsoft.Json
+    - 개인프로젝트 참조소스
+
+      https://github.com/hugoMGSung/basic-wpf-2024/assets/59336331/f1dddc3c-d777-48b0-a212-ec0bcb6dbbd6
 ## 8일차
 - WPF 개인프로젝트 포트폴리오 작업
