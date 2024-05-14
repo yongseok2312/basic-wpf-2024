@@ -1,0 +1,119 @@
+﻿<mah:MetroWindow x:Class="miniproject3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:miniproject3"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+          xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Title="MapSearch" Height="500" Width="900">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="541*"/>
+            <ColumnDefinition Width="259*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="SearchAddr" Grid.Column="0" Margin="5,-20,5,0"
+                     FontSize="14" VerticalAlignment="Center" mah:TextBoxHelper.Watermark="검색어를 작성하세요" mah:TextBoxHelper.WatermarkAlignment="Center" mah:TextBoxHelper.AutoWatermark="True" 
+                     mah:TextBoxHelper.ClearTextButton="True"
+                     KeyDown="SearchAddr_KeyDown"/>
+            <Button x:Name="BtnSearch" Grid.Column="1" FontSize="14" Content="검색" Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}" Width="113" Click="BtnSearch_Click" HorizontalAlignment="Center" Margin="0,-20,0,0">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconModern Kind="Magnify" Margin="5"/>
+                            <TextBlock Text="{Binding}" Margin="5"/>
+                        </StackPanel>
+                        
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Column="0" Margin="0,72,0,72" Grid.RowSpan="3">
+            <Border Name="mapgroup" >
+                <local:MapControl x:Name="mapControl" Zoom="13" MaxZoom="24" MinZoom="1" Margin="0,0,0,-11"  />
+            </Border>
+        </Grid>
+        
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <Button x:Name="BtnAddFavorite" Content="즐겨찾기 추가" Margin="5, 20" FontSize="12" Click="BtnAddFavorite_Click"
+                Style="{StaticResource MahApps.Styles.Button.Square.Accent}">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterial Kind="PlaylistPlus" Margin="5" />
+                            <TextBlock Text="{Binding}" Margin="5" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+
+            <Button x:Name="BtnViewFavorite" Content="즐겨찾기 보기" Margin="5, 20" FontSize="12" Click="BtnViewFavorite_Click"
+     Style="{StaticResource MahApps.Styles.Button.Square.Highlight}">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterial Kind="PlaylistCheck" Margin="5" />
+                            <TextBlock Text="{Binding}" Margin="5" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+
+            <Button x:Name="Addrcurrent" Content="현재 위치 추가" Margin="5, 20" FontSize="12"
+                 Style="{StaticResource MahApps.Styles.Button.Square}" Click="Addrcurrent_Click">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterial Kind="PlaylistPlus" Margin="5" />
+                            <TextBlock Text="{Binding}" Margin="5" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+            <Button x:Name="BtnDelFavorite" Content="즐겨 찾기 삭제" Margin="5, 20" FontSize="12"
+                Style="{StaticResource MahApps.Styles.Button.Flat}" Background="red" Foreground="White" Click="BtnDelFavorite_Click_1">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}" Margin="5" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+            
+        </StackPanel>
+        <mah:Badged Grid.Column="1" Content="Badged" HorizontalAlignment="Left" Margin="461,269,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <TabControl Grid.Column="1" Grid.RowSpan="3">
+            <TabItem Header="검색 결과">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="SearchResult" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="즐겨찾기">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="34*"/>
+                        <ColumnDefinition Width="109*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="Favoritesearch" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2"/>
+                </Grid>
+            </TabItem>
+            <DataGrid Height="360" Width="231" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        </TabControl>
+
+    </Grid>
+</mah:MetroWindow>
