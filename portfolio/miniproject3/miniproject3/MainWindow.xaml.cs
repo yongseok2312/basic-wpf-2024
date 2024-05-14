@@ -25,17 +25,18 @@ namespace miniproject3
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        PointLatLng start;
-        PointLatLng end;
-        GMapMarker currentMarker;
-        List<GMapMarker> Circles = new List<GMapMarker>();
+   
         public MainWindow()
         {
             InitializeComponent();
+            StartMap();
+        }
+        private void StartMap()
+        {
             GMapProvider.WebProxy = System.Net.WebRequest.DefaultWebProxy;
             GMapProvider.WebProxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
             GMapProvider.Language = GMap.NET.LanguageType.Korean;
-            GoogleMapProvider.Instance.ApiKey = "AIzaSyBk30B3_u4uTU-kQUhx5JgobmR8ZG6J7tg";
+            GoogleMapProvider.Instance.ApiKey = "1";
 
             // 지도 설정
             mapControl.MapProvider = GoogleMapProvider.Instance;
@@ -46,6 +47,7 @@ namespace miniproject3
             mapControl.Zoom = 14;
             mapControl.ShowCenter = false;
             mapControl.DragButton = MouseButton.Left;
+
         }
 
         private void SearchAddr_KeyDown(object sender, KeyEventArgs e)
@@ -55,7 +57,30 @@ namespace miniproject3
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
-
+            string address = SearchAddr.Text; // 사용자가 입력한 주소 가져오기
+            PointLatLng? pos = GetLocationFromAddress(address); // 주소를 좌표로 변환
+            if (pos != null)
+            {
+                mapControl.Position = pos.Value; // 지도의 중심 위치 설정
+            }
+            else
+            {
+                // 주소를 찾을 수 없는 경우 메시지 표시
+                MessageBox.Show("주소를 찾을 수 없습니다.");
+            }
+        }
+        private PointLatLng? GetLocationFromAddress(string address)
+        {
+            GeoCoderStatusCode status;
+            PointLatLng? pos = GMap.NET.MapProviders.GoogleMapProvider.Instance.GetPoint(address, out status);
+            if (status == GeoCoderStatusCode.OK && pos != null)
+            {
+                return pos;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         private void BtnAddFavorite_Click(object sender, RoutedEventArgs e)

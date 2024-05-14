@@ -26,7 +26,7 @@
 
             <TextBox x:Name="SearchAddr" Grid.Column="0" Margin="5,-20,5,0"
                      FontSize="14" VerticalAlignment="Center" mah:TextBoxHelper.Watermark="검색어를 작성하세요" mah:TextBoxHelper.WatermarkAlignment="Center" mah:TextBoxHelper.AutoWatermark="True" 
-                     mah:TextBoxHelper.ClearTextButton="True"
+                     mah:TextBoxHelper.ClearTextButton="True" 
                      KeyDown="SearchAddr_KeyDown"/>
             <Button x:Name="BtnSearch" Grid.Column="1" FontSize="14" Content="검색" Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}" Width="113" Click="BtnSearch_Click" HorizontalAlignment="Center" Margin="0,-20,0,0">
                 <Button.ContentTemplate>
@@ -99,9 +99,13 @@
         <mah:Badged Grid.Column="1" Content="Badged" HorizontalAlignment="Left" Margin="461,269,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <TabControl Grid.Column="1" Grid.RowSpan="3">
             <TabItem Header="검색 결과">
-                <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="SearchResult" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-                </Grid>
+                <ListView x:Name="SearchResultListView" HorizontalAlignment="Left" Height="200" Margin="10" VerticalAlignment="Top" Width="300">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Address" Width="200" DisplayMemberBinding="{Binding}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </TabItem>
             <TabItem Header="즐겨찾기">
                 <Grid Background="#FFE5E5E5">
