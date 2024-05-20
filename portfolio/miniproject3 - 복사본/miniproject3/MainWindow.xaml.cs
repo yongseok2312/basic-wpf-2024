@@ -19,6 +19,9 @@ using GMap.NET.WindowsPresentation;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
+using CefSharp.DevTools.Network;
+using System.Data;
 
 namespace miniproject3
 {
@@ -33,6 +36,7 @@ namespace miniproject3
             InitializeComponent();
             StartMap();
             InitializeListView();
+            initialdb();
         }
         private void InitializeListView()
         {
@@ -116,6 +120,18 @@ namespace miniproject3
             {
                 searchResults.Add($"{address}");
                 mapControl.Position = position.Value; // 지도의 중심 위치 설정
+
+                GMapMarker marker = new GMapMarker(position.Value)
+                {
+                    Shape = new Ellipse
+                    {
+                        Fill = Brushes.Red, 
+                        Width = 10, 
+                        Height = 10
+                    }
+                };
+
+                mapControl.Markers.Add(marker);
             }
             else
             {
@@ -126,40 +142,76 @@ namespace miniproject3
 
         private void BtnAddFavorite_Click(object sender, RoutedEventArgs e)
         {
+            using (SqlConnection conn = new SqlConnection(Helper.Common.CONNSTRING))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(Map.Dbquery.INSERT_QUERY, conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataSet dSet = new DataSet();
+                adapter.Fill(dSet);
+                List<string> saveDates = new List<string>();
 
+                foreach (DataRow row in dSet.Tables[0].Rows)
+                {
+                    saveDates.Add(Convert.ToString(row["addr"]));
+                }
+                Favoritesearch.ItemsSource = saveDates;
+            }
         }
 
         private void BtnViewFavorite_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
+        private void initialdb()
+        {
+            using (SqlConnection conn = new SqlConnection(Helper.Common.CONNSTRING))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(Map.Dbquery.SELECT_QUERY, conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataSet dSet = new DataSet();
+                adapter.Fill(dSet);
+                List<string> saveDates = new List<string>();
+
+                foreach (DataRow row in dSet.Tables[0].Rows)
+                {
+                    saveDates.Add(Convert.ToString(row["addr"]));
+                }
+                Favoritesearch.ItemsSource = saveDates;
+            }
+        }
 
         private void BtnDelFavorite_Click_1(object sender, RoutedEventArgs e)
         {
+            using (SqlConnection conn = new SqlConnection(Helper.Common.CONNSTRING))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(Map.Dbquery.DELETE_QUERY, conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataSet dSet = new DataSet();
+                adapter.Fill(dSet);
+                List<string> saveDates = new List<string>();
 
+                foreach (DataRow row in dSet.Tables[0].Rows)
+                {
+                    saveDates.Add(Convert.ToString(row["addr"]));
+                }
+                Favoritesearch.ItemsSource = saveDates;
+            }
         }
-
-        private void Addrcurrent_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        
 
         private async void TabItem_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            try
+            string address = SearchResultListView.SelectedItem.ToString(); // 검색할 주소 가져오기
+            PointLatLng? position = await GetLocationFromAddress(address); // 주소를 좌표로 변환
+            if (position != null)
             {
-                TabItem tabItem = sender as TabItem;
-
-                string address = tabItem.Tag.ToString();
-                PointLatLng? position = await GetLocationFromAddress(address);
-                mapControl.Position = position.Value;
+                mapControl.Position = position.Value; // 지도의 중심 위치 설정
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show($"An error occurred: {ex.Message}");
+                MessageBox.Show("주소를 찾을 수 없습니다.");
             }
         }
     }
