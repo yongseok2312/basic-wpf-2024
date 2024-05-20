@@ -164,3 +164,12 @@ https://github.com/yongseok2312/basic-wpf-2024/assets/135982451/57455208-4ac3-47
 - WPF 개인프로젝트 포트폴리오 작업
     1. 구글 지도 맵
         - 구글 맵 연동(API키 받기)
+        - ![wpf006](https://github.com/yongseok2312/basic-wpf-2024/assets/135982451/18d076f5-3808-491b-8e30-0b4163a54c7b)
+        - 초기 디자인
+        - 검색 시 표시 하며 검색기록 남기기
+
+https://github.com/yongseok2312/basic-wpf-2024/assets/135982451/2c22f684-833f-4a73-bdf0-b51b5b2122e7
+
+    - 해야할것..
+        - 즐겨찾기등 클릭 이벤트 제작 DB연동
+          
