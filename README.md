@@ -162,3 +162,5 @@ https://github.com/yongseok2312/basic-wpf-2024/assets/135982451/57455208-4ac3-47
       
 ## 8일차
 - WPF 개인프로젝트 포트폴리오 작업
+    1. 구글 지도 맵
+        - 구글 맵 연동(API키 받기)
