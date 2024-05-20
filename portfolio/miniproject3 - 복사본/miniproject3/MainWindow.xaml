@@ -98,8 +98,8 @@
         </StackPanel>
         <mah:Badged Grid.Column="1" Content="Badged" HorizontalAlignment="Left" Margin="461,269,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <TabControl Grid.Column="1" Grid.RowSpan="3">
-            <TabItem Header="검색 결과">
-                <ListView x:Name="SearchResultListView" HorizontalAlignment="Left" Height="200" Margin="10" VerticalAlignment="Top" Width="300">
+            <TabItem Header="검색 결과" PreviewMouseDoubleClick="TabItem_PreviewMouseDoubleClick">
+                <ListView x:Name="SearchResultListView" HorizontalAlignment="Left" Height="200" Margin="10" VerticalAlignment="Top" Width="300" >
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Address" Width="200" DisplayMemberBinding="{Binding}" />

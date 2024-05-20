@@ -144,5 +144,23 @@ namespace miniproject3
         {
 
         }
+
+        
+
+        private async void TabItem_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                TabItem tabItem = sender as TabItem;
+
+                string address = tabItem.Tag.ToString();
+                PointLatLng? position = await GetLocationFromAddress(address);
+                mapControl.Position = position.Value;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+        }
     }
 }
