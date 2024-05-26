@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:BusanFoodmap"
         xmlns:iconPack="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="BusanFoodMap" Height="450" Width="800" MinHeight="300" MinWidth="600">
+        Title="BusanFoodMap" Height="450" Width="800" MinHeight="300" MinWidth="600" Loaded="MetroWindow_Loaded">
     <mah:MetroWindow.IconTemplate>
         <DataTemplate>
             <iconPack:PackIconModern Kind="Food" Margin="10,7,0,0" Foreground="White" />
@@ -31,7 +31,7 @@
             <Label Content="부산 맛집" FontSize="25" FontWeight="Bold" Margin="10" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="239,0,0,0" Width="561">
                 <Button x:Name="BtnReqRealtime" Content="실시간 조회" Width="135" Margin="5,10" 
-                Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Height="41"/>
+                Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Height="41" Click="BtnReqRealtime_Click" />
                 <Button x:Name="BtnSaveData" Content="저장" Width="94" Margin="5,10"
                 Style="{StaticResource MahApps.Styles.Button.Square.Highlight}" Height="41" />
                 <Button x:Name="BtnDeleteData" Content="삭제" Width="91" Margin="5,10" 
