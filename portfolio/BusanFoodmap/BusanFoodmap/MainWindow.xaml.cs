@@ -56,13 +56,16 @@ namespace BusanFoodmap
             }
         }
 
+        private async void BtnReqRealtime_Click(object sender, RoutedEventArgs e)
+        {
+            await BtnReqRealtime_ClickAsync(sender, e);
+        }
 
         private async Task BtnReqRealtime_ClickAsync(object sender, RoutedEventArgs e)
         {
             string openApiUri = "http://apis.data.go.kr/6260000/FoodService/getFoodEn";
             string result = string.Empty;
 
-            // WebRequest, WebResponse 객체
             WebRequest req = null;
             WebResponse res = null;
             StreamReader reader = null;
@@ -86,28 +89,33 @@ namespace BusanFoodmap
             var status = Convert.ToInt32(jsonResult["status"]);
 
             if (status == 200)
-            {
-                var data = jsonResult["data"];
-                var jsonArray = data as JArray; // json자체에서 []안에 들어간 배열데이터만 JArray 변환가능
-
-                var dustSensors = new List<Foodmap>();
-                foreach (var item in jsonArray)
                 {
-                    dustSensors.Add(new Foodmap()
+                    var data = jsonResult["data"] as JArray;
+                    if (data != null)
                     {
-                        MAINT_TILTE = Convert.ToString(item["MAIN_TITLE"]),
-                        homepage = Convert.ToString(item["MAIN_IMG_THUMB"]),
-                        TEL = Convert.ToString(item["CNTCT_TEL"]),
-                        Coordx = Convert.ToDouble(item["LNG"]),
-                        Coordy = Convert.ToDouble(item["LAT"]),
-                        addr = Convert.ToString(item)
-                    });
+                        var foodMaps = data.Select(item => new Foodmap
+                        {
+                            MAINT_TILTE = Convert.ToString(item["MAIN_TITLE"]),
+                            homepage = Convert.ToString(item["MAIN_IMG_THUMB"]),
+                            TEL = Convert.ToString(item["CNTCT_TEL"]),
+                            Coordx = Convert.ToDouble(item["LNG"]),
+                            Coordy = Convert.ToDouble(item["LAT"]),
+                            //addr = Convert.ToString(item)
+                        }).ToList();
+
+                        this.DataContext = foodMaps;
+                        StsResult.Content = $"OpenAPI {foodMaps.Count}건 조회완료!";
+                    }
+                    else
+                    {
+                        await this.ShowMessageAsync("오류", "데이터를 파싱하는 중 오류가 발생했습니다.");
+                    }
                 }
-
-                this.DataContext = dustSensors;
-                StsResult.Content = $"OpenAPI {dustSensors.Count}건 조회완료!";
-
+                else
+                {
+                    await this.ShowMessageAsync("오류", $"OpenAPI 응답 오류: {status}");
+                }
             }
         }
+
     }
-}
