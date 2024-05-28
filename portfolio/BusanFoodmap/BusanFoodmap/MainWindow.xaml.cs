@@ -18,6 +18,10 @@ using System.Net;
 using System.IO;
 using System.Diagnostics;
 using BusanFoodmap.Models;
+using System.Net.Http;
+using System.Xml.Linq;
+using static System.Net.WebRequestMethods;
+using Microsoft.VisualBasic.Logging;
 
 namespace BusanFoodmap
 {
@@ -33,10 +37,10 @@ namespace BusanFoodmap
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            InitComboDateFromDB();
+            //InitComboDateFromDB();
         }
 
-        private void InitComboDateFromDB()
+        /*private void InitComboDateFromDB()
         {
             using (SqlConnection conn = new SqlConnection(Helplers.Common.CONNSTRING))
             {
@@ -54,22 +58,16 @@ namespace BusanFoodmap
 
                 CboReqDate.ItemsSource = saveDates;
             }
-        }
+        }*/
 
         private async void BtnReqRealtime_Click(object sender, RoutedEventArgs e)
         {
-            await BtnReqRealtime_ClickAsync(sender, e);
-        }
-
-        private async Task BtnReqRealtime_ClickAsync(object sender, RoutedEventArgs e)
-        {
-            string openApiUri = "http://apis.data.go.kr/6260000/FoodService/getFoodEn";
+            string openApiUri = "http://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=WDeiD%2FbkKC0qewX%2BCWWJNFo1aT7K%2B%2F%2FUP5tshjyEEN%2BF9mYBVT78QrkE3wS6KrscaUK7F4o4%2B2pNxIGcMfnsnQ%3D%3D&resultType=json";
             string result = string.Empty;
 
             WebRequest req = null;
             WebResponse res = null;
             StreamReader reader = null;
-
             try
             {
                 req = WebRequest.Create(openApiUri);
@@ -82,40 +80,39 @@ namespace BusanFoodmap
             }
             catch (Exception ex)
             {
-                await this.ShowMessageAsync("오류", $"OpenAPI 조회오류 {ex.Message}");
+                await this.ShowMessageAsync("오류", $"OpenApi 조회 오류 {ex.Message}");
+                return;
             }
-
+            
+           
             var jsonResult = JObject.Parse(result);
-            var status = Convert.ToInt32(jsonResult["status"]);
+            //var status = Convert.ToInt32(jsonResult["getFoodKr"]);
+            //if (status == 200)
+            {
+                var data = jsonResult["item"];
+                var jsonArray = data as JArray;
 
-            if (status == 200)
+                var foodsearch = new List<Foodmap>();
+                foreach (var item in jsonArray)
                 {
-                    var data = jsonResult["data"] as JArray;
-                    if (data != null)
+                    foodsearch.Add(new Foodmap()
                     {
-                        var foodMaps = data.Select(item => new Foodmap
-                        {
-                            MAINT_TILTE = Convert.ToString(item["MAIN_TITLE"]),
-                            homepage = Convert.ToString(item["MAIN_IMG_THUMB"]),
-                            TEL = Convert.ToString(item["CNTCT_TEL"]),
-                            Coordx = Convert.ToDouble(item["LNG"]),
-                            Coordy = Convert.ToDouble(item["LAT"]),
-                            //addr = Convert.ToString(item)
-                        }).ToList();
+                        MAIN_TITLE = Convert.ToString(item["MAIN_TITLE"]),
+                        MAIN_IMG_THUMB = Convert.ToString(item["MAIN_IMG_THUMB"]),
+                        CNTCT_TEL = Convert.ToString(item["CNTCT_TEL"]),
+                        LNG = Convert.ToDouble(item["LNG"]),
+                        LAT = Convert.ToDouble(item["LAT"])
+                    });
+                }
 
-                        this.DataContext = foodMaps;
-                        StsResult.Content = $"OpenAPI {foodMaps.Count}건 조회완료!";
-                    }
-                    else
-                    {
-                        await this.ShowMessageAsync("오류", "데이터를 파싱하는 중 오류가 발생했습니다.");
-                    }
-                }
-                else
+                // Dispatcher.Invoke를 사용하여 UI 스레드에서 UI 업데이트
+                Dispatcher.Invoke(() =>
                 {
-                    await this.ShowMessageAsync("오류", $"OpenAPI 응답 오류: {status}");
-                }
+                    this.DataContext = foodsearch;
+                    StsResult.Content = $"OpenAPI {foodsearch.Count}건 조회 완료!";
+                });
             }
         }
 
-    }
+    }   
+}

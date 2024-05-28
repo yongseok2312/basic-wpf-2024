@@ -32,10 +32,10 @@ namespace ex11_Gimhae_FineDust
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            InitComboDateFromDB();
+            //InitComboDateFromDB();
         }
 
-        private void InitComboDateFromDB()
+        /*private void InitComboDateFromDB()
         {
             using (SqlConnection conn = new SqlConnection(Helpers.Common.CONNSTRING))
             {
@@ -53,7 +53,7 @@ namespace ex11_Gimhae_FineDust
 
                 CboReqDate.ItemsSource = saveDates;
             }
-        }
+        }*/
 
         // 실시간조회 버튼 클릭
         private async void BtnReqRealtime_Click(object sender, RoutedEventArgs e)
@@ -161,7 +161,7 @@ namespace ex11_Gimhae_FineDust
                 await this.ShowMessageAsync("저장오류", $"저장오류 {ex.Message}");
             }
 
-            InitComboDateFromDB();
+            //InitComboDateFromDB();
         }
 
         // 수업 이후 추가내용. 필요시 구현할 것

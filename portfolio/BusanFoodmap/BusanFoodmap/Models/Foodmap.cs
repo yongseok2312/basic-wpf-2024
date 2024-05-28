@@ -8,13 +8,13 @@ namespace BusanFoodmap.Models
 {
     public class Foodmap
     {
-        public string  MAINT_TILTE { get; set; } // 제목
-        public double Coordx { get; set; } // 경도
-        public double Coordy { get; set; } // 위도
+        public string MAIN_TITLE { get; set; } // 제목
+        public double LNG { get; set; } // 경도
+        public double LAT { get; set; } // 위도
 
-        public string TEL { get; set; } // 휴대폰
+        public string CNTCT_TEL { get; set; } // 휴대폰
 
-        public string homepage { get; set; } // 홈페이지
+        public string MAIN_IMG_THUMB { get; set; } // 홈페이지
         
         public string addr { get ; set; }   //  주소
 
