@@ -173,3 +173,10 @@ https://github.com/yongseok2312/basic-wpf-2024/assets/135982451/2c22f684-833f-4a
     - 해야할것..
         - 즐겨찾기등 클릭 이벤트 제작 DB연동
           
+- 부산 음식점 맵
+    - 공공데이터 (부산음식점) API 가져오기
+    - 초기 디자인 제작
+    - 실시간 조회 버튼 이벤트 작성
+    ![alt text](image.png)
+
+    
