@@ -83,13 +83,12 @@ namespace BusanFoodmap
                 await this.ShowMessageAsync("오류", $"OpenApi 조회 오류 {ex.Message}");
                 return;
             }
-            
-           
-            var jsonResult = JObject.Parse(result);
-            //var status = Convert.ToInt32(jsonResult["getFoodKr"]);
-            //if (status == 200)
+
+
+            try
             {
-                var data = jsonResult["item"];
+                var jsonResult = JObject.Parse(result);
+                var data = jsonResult["getFoodKr"]["item"];
                 var jsonArray = data as JArray;
 
                 var foodsearch = new List<Foodmap>();
@@ -98,8 +97,12 @@ namespace BusanFoodmap
                     foodsearch.Add(new Foodmap()
                     {
                         MAIN_TITLE = Convert.ToString(item["MAIN_TITLE"]),
+                        GUGUN_NM = Convert.ToString(item["GUGUN_NM"]),
+                        addr = Convert.ToString(item["ADDR1"]),
+                        RPRSNTV_MENU = Convert.ToString(item["RPRSNTV_MENU"]),
                         MAIN_IMG_THUMB = Convert.ToString(item["MAIN_IMG_THUMB"]),
                         CNTCT_TEL = Convert.ToString(item["CNTCT_TEL"]),
+                        USAGE_DAY_WEEK_AND_TIME = Convert.ToString(item["USAGE_DAY_WEEK_AND_TIME"]),
                         LNG = Convert.ToDouble(item["LNG"]),
                         LAT = Convert.ToDouble(item["LAT"])
                     });
@@ -111,6 +114,10 @@ namespace BusanFoodmap
                     this.DataContext = foodsearch;
                     StsResult.Content = $"OpenAPI {foodsearch.Count}건 조회 완료!";
                 });
+            }
+            catch (Exception ex)
+            {
+                await this.ShowMessageAsync("오류", $"JSON 처리 오류 {ex.Message}");
             }
         }
 
