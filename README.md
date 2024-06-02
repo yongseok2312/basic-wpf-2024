@@ -178,5 +178,7 @@ https://github.com/yongseok2312/basic-wpf-2024/assets/135982451/57455208-4ac3-47
         - 초기 디자인 제작
         - 실시간 조회 버튼 이벤트 작성
         ![alt text](image.png)
+        - 더블클릭 이벤트 작성
+        ![alt text](image-1.png)
 
     

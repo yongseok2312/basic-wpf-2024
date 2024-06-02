@@ -62,7 +62,7 @@ namespace BusanFoodmap
 
         private async void BtnReqRealtime_Click(object sender, RoutedEventArgs e)
         {
-            string openApiUri = "http://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=WDeiD%2FbkKC0qewX%2BCWWJNFo1aT7K%2B%2F%2FUP5tshjyEEN%2BF9mYBVT78QrkE3wS6KrscaUK7F4o4%2B2pNxIGcMfnsnQ%3D%3D&resultType=json";
+            string openApiUri = "https://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=WDeiD%2FbkKC0qewX%2BCWWJNFo1aT7K%2B%2F%2FUP5tshjyEEN%2BF9mYBVT78QrkE3wS6KrscaUK7F4o4%2B2pNxIGcMfnsnQ%3D%3D&numOfRows=1000&pageNo=1&resultType=json";
             string result = string.Empty;
 
             WebRequest req = null;
@@ -121,5 +121,15 @@ namespace BusanFoodmap
             }
         }
 
+        private void GrdResult_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var curItem = GrdResult.SelectedItem as Foodmap;
+
+            var mapWindow = new Mapwindow(curItem.LAT, curItem.LNG);
+            mapWindow.Owner = this;
+            mapWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            mapWindow.ShowDialog();
+
+        }
     }   
 }
