@@ -51,7 +51,7 @@
             <StatusBarItem x:Name="StsResult" />
         </StatusBar>
         <TabControl Grid.Row="1" Grid.RowSpan="4">
-            <TabItem Header="부산 맛집 검색">
+            <TabItem Header="검색">
                 <!-- 중간 데이터그리드영역-->
                 <DataGrid x:Name="GrdResult" Grid.Row="1"  MouseDoubleClick="GrdResult_MouseDoubleClick"
                   IsReadOnly="True" ItemsSource="{Binding}"
