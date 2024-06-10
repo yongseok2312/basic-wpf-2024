@@ -25,15 +25,42 @@ namespace BusanFoodmap.Models
 
 
 
-        public static readonly string SELECT_QUERY = @"SELECT[Title]
-                                                      ,[Tel]
-                                                      ,[Homepage]
-                                                      ,[coordx]
-                                                      ,[coordy]
+        public static readonly string SELECT_QUERY = @"SELECT [MAINT_TILTE]
+                                                      ,[RPRSNTV_MENU]
+                                                      ,[GUGUN_NM]
                                                       ,[addr]
-                                                      ,[RPP_menu]
-                                                        FROM[dbo].[foodmap]";
+                                                      ,[USAGE_DAY_WEEK_AND_TIME]
+                                                      ,[CNTCT_TEL]
+                                                      ,[MAIN_IMG_THUMB]
+                                                      ,[LNG]
+                                                      ,[LAT]
+                                                  FROM [dbo].[Table_1]";
 
-        
+        public static readonly string Insert_QUERY = @"INSERT INTO [dbo].[Table_1]
+                                                       ([MAINT_TILTE]
+                                                       ,[RPRSNTV_MENU]
+                                                       ,[GUGUN_NM]
+                                                       ,[addr]
+                                                       ,[USAGE_DAY_WEEK_AND_TIME]
+                                                       ,[CNTCT_TEL]
+                                                       ,[MAIN_IMG_THUMB]
+                                                       ,[LNG]
+                                                       ,[LAT])
+                                                 VALUES
+                                                       (@MAINT_TILTE
+                                                       ,@RPRSNTV_MENU
+                                                       ,@GUGUN_NM
+                                                       ,@addr
+                                                       ,@USAGE_DAY_WEEK_AND_TIME
+                                                       ,@CNTCT_TEL
+                                                       ,@MAIN_IMG_THUMB
+                                                       ,@LNG
+                                                       ,@LAT)";
+
+        public static readonly string Delete_QUERY = @"DELETE FROM [dbo].[Table_1]
+                                                         WHERE MAINT_TILTE=@MAINT_TILTE";
+
+
+
     }
 }

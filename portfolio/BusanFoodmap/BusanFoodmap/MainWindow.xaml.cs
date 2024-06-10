@@ -131,5 +131,50 @@ namespace BusanFoodmap
             mapWindow.ShowDialog();
 
         }
-    }   
-}
+
+        private async void BtnSaveData_Click(object sender, RoutedEventArgs e)
+        {
+            if (GrdResult.Items.Count == 0)
+            {
+                await this.ShowMessageAsync("저장오류", "실시간 조회후 저장하십시오.");
+                return;
+            }
+
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Helplers.Common.CONNSTRING))
+                {
+                    conn.Open();
+
+                    var insRes = 0;
+                    foreach (Foodmap item in GrdResult.Items)
+                    {
+                        SqlCommand cmd = new SqlCommand(Models.Foodmap.Insert_QUERY, conn);
+                        cmd.Parameters.AddWithValue("@MAINT_TILTE", item.MAIN_TITLE);
+                        cmd.Parameters.AddWithValue("@RPRSNTV_MENU", item.RPRSNTV_MENU);
+                        cmd.Parameters.AddWithValue("@GUGUN_NM", item.GUGUN_NM);
+                        cmd.Parameters.AddWithValue("@addr", item.addr);
+                        cmd.Parameters.AddWithValue("@USAGE_DAY_WEEK_AND_TIME", item.USAGE_DAY_WEEK_AND_TIME);
+                        cmd.Parameters.AddWithValue("@CNTCT_TEL", item.CNTCT_TEL);
+                        cmd.Parameters.AddWithValue("@MAIN_IMG_THUMB", item.MAIN_IMG_THUMB);
+                        cmd.Parameters.AddWithValue("@LNG", item.LNG);
+                        cmd.Parameters.AddWithValue("@LAT", item.LAT);
+                        insRes += cmd.ExecuteNonQuery();
+                    }
+                    if (insRes > 0)
+                    {
+                        await this.ShowMessageAsync("저장", "DB저장성공!");
+                        StsResult.Content = $"DB저장 {insRes}건 성공!";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await this.ShowMessageAsync("저장오류", $"저장오류 {ex.Message}");
+            }
+        }
+
+    }
+}   
+

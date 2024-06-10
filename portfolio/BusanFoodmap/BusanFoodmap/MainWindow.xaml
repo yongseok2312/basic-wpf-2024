@@ -33,7 +33,7 @@
                 <Button x:Name="BtnReqRealtime" Content="실시간 조회" Width="135" Margin="5,10" Click="BtnReqRealtime_Click"
                 Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Height="41"/>
                 <Button x:Name="BtnSaveData" Content="저장" Width="94" Margin="5,10"
-                Style="{StaticResource MahApps.Styles.Button.Square.Highlight}" Height="41" />
+                Style="{StaticResource MahApps.Styles.Button.Square.Highlight}" Height="41" Click="BtnSaveData_Click" />
                 <Button x:Name="BtnDeleteData" Content="삭제" Width="91" Margin="5,10" 
                 Style="{StaticResource MahApps.Styles.Button.Square.Highlight}" Height="41" Background="Red"/>
                 <ComboBox x:Name="CboReqDate" Width="192" Margin="5,10,10,10"
